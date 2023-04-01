@@ -24,6 +24,5 @@ pub fn create_router(app_state: Arc<AppState>) -> Router {
                 .patch(edit_note_handler)
                 .delete(delete_note_handler),
         )
-        // .route("/api/notes/", post(create_note_handler))
         .with_state(app_state)
 }
