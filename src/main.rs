@@ -48,8 +48,6 @@ async fn main() {
     let app = create_router(Arc::new(AppState { db: pool.clone() })).layer(cors);
 
     println!("🚀 Server started successfully");
-    axum::Server::bind(&"0.0.0.0:8000".parse().unwrap())
-        .serve(app.into_make_service())
-        .await
-        .unwrap();
+    let listener = tokio::net::TcpListener::bind("0.0.0.0:8000").await.unwrap();
+    axum::serve(listener, app).await.unwrap();
 }
